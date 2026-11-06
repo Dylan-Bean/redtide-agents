@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "redtide-kb": {
+      "command": "python",
+      "args": ["mcp/redtide_mcp_server.py"],
+      "env": {
+        "EMBEDDING_PROVIDER": "local"
+      }
+    }
+  }
+}

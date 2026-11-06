@@ -1,0 +1,30 @@
+{"id": "T01", "category": "发生机制", "question": "为什么海水养殖海湾赤潮高发？", "key_points": ["残饵|自污染|粪便", "氮磷|营养盐|富营养", "水交换|水动力|水流不畅"], "must_cite": true}
+{"id": "T02", "category": "发生机制", "question": "为什么暴雨过后一周内容易发生赤潮？", "key_points": ["径流|冲刷|暴雨", "营养盐|氮磷|脉冲", "分层|放晴|水温"], "must_cite": true}
+{"id": "T03", "category": "发生机制", "question": "为什么陆源控源截污多年后，赤潮仍然年年发生？", "key_points": ["内源|沉积物|底泥", "孢囊|越冬|萌发", "见效周期|年|长期"], "must_cite": true}
+{"id": "T04", "category": "发生机制", "question": "夜光藻自身不产毒素，为什么还能形成大面积赤潮并造成危害？", "key_points": ["无毒|不产毒", "窒息|鳃|耗氧", "聚集|辐合|物理"], "must_cite": true}
+{"id": "T05", "category": "发生机制", "question": "为什么夏季甲藻型赤潮比其他季节更多？", "key_points": ["分层|层化", "水温|高温", "代谢|生长速率|窗口"], "must_cite": true}
+{"id": "T06", "category": "发生机制", "question": "上升流区为什么是甲藻赤潮的温床？", "key_points": ["上升流|上涌", "营养盐|富营养", "滞留|稳定|持续"], "must_cite": true}
+{"id": "T07", "category": "发生机制", "question": "细菌和微生物环在赤潮维持中起什么作用？", "key_points": ["细菌|微生物", "矿化|再生", "正反馈|持续"], "must_cite": true}
+{"id": "T08", "category": "发生机制", "question": "为什么只监测营养盐浓度不足以准确预测赤潮？", "key_points": ["混合营养|摄食|捕食", "物理聚集|输运|锋面", "孢囊|接种|种间"], "must_cite": true}
+{"id": "T09", "category": "发生机制", "question": "赤潮预测模型为什么必须纳入水文气象要素？", "key_points": ["分层|风|搅动", "降雨|径流", "水温|光照"], "must_cite": true}
+{"id": "T10", "category": "发生机制", "question": "产毒甲藻为什么能逃脱浮游动物的摄食控制？", "key_points": ["毒素|毒害", "摄食率下降|捕食逃逸|拒食", "优势|维持"], "must_cite": true}
+{"id": "T11", "category": "主要藻种", "question": "夜光藻赤潮有什么危害？发现后养殖户应该怎么做？", "key_points": ["无毒|不产毒", "耗氧|窒息|鳃", "监测|关注|预警"], "must_cite": true}
+{"id": "T12", "category": "主要藻种", "question": "为什么发现亚历山大藻赤潮必须从严处置？", "key_points": ["PSP|麻痹性贝毒|石房蛤", "贝类|富集", "禁捕|从严|阈值低"], "must_cite": true}
+{"id": "T13", "category": "主要藻种", "question": "米氏凯伦藻赤潮的主要危害是什么？", "key_points": ["溶血|鱼毒|鳃", "死亡|经济损失", "应急|处置优先"], "must_cite": true}
+{"id": "T14", "category": "主要藻种", "question": "东海原甲藻赤潮为什么每年春季在长江口外大规模爆发？", "key_points": ["长江|冲淡水|口", "营养盐|氮磷", "春季|水温|季节"], "must_cite": true}
+{"id": "T15", "category": "主要藻种", "question": "为什么说中肋骨条藻是富营养化的指示种？", "key_points": ["硅藻| opportunistic|机会种", "富营养|高氮磷", "河口|近岸"], "must_cite": true}
+{"id": "T16", "category": "主要藻种", "question": "产毒赤潮藻是如何跨海域扩散的？如何防控？", "key_points": ["压载水|船舶", "孢囊|休眠", "口岸|监测|公约"], "must_cite": true}
+{"id": "T17", "category": "监测预警", "question": "卫星遥感如何监测赤潮？主要局限是什么？", "key_points": ["叶绿素|反演", "浑浊|二类水体|云", "现场|确认|结合"], "must_cite": true}
+{"id": "T18", "category": "监测预警", "question": "在线监测浮标在赤潮预警中的价值与维护要点是什么？", "key_points": ["浮标|原位|在线", "高频|连续|小时", "附着|校准|维护"], "must_cite": true}
+{"id": "T19", "category": "监测预警", "question": "有了分子快速检测，显微镜计数法还需要吗？", "key_points": ["法定|规程|标准", "鉴定|藻种", "慢|通量|耗时"], "must_cite": true}
+{"id": "T20", "category": "监测预警", "question": "qPCR 分子监测在赤潮预警中的优势是什么？", "key_points": ["qPCR|eDNA|分子", "产毒基因|sxtA", "灵敏|早期|快速"], "must_cite": true}
+{"id": "T21", "category": "监测预警", "question": "赤潮消退期为什么反而要加密溶解氧监测？", "key_points": ["分解|耗氧|沉降", "缺氧|低氧", "底栖|死亡|次生"], "must_cite": true}
+{"id": "T22", "category": "监测预警", "question": "赤潮水色恢复正常后，为什么不能立即解除贝类禁捕？", "key_points": ["富集|代谢|排毒", "周|月|长期带毒", "检测|解禁"], "must_cite": true}
+{"id": "T23", "category": "监测预警", "question": "高温烹调能去除贝类体内的赤潮毒素吗？", "key_points": ["耐热|不能|无法", "PSP|毒素", "检测|受检"], "must_cite": true}
+{"id": "T24", "category": "治理修复", "question": "改性粘土为什么成为国际公认的赤潮应急治理技术？", "key_points": ["改性粘土|蒙脱土", "絮凝|去除", "规模化|公认|80"], "must_cite": true}
+{"id": "T25", "category": "治理修复", "question": "为什么不推荐用硫酸铜大规模治理赤潮？", "key_points": ["生态风险|毒害", "二次污染|重金属", "非目标|局限|封闭水体"], "must_cite": true}
+{"id": "T26", "category": "治理修复", "question": "赤潮的根本治理为什么必须依靠控源减排？见效要多久？", "key_points": ["氮磷|总量控制|减排", "年|长期|周期", "黑海|国际经验|结合应急"], "must_cite": true}
+{"id": "T27", "category": "治理修复", "question": "贝藻混养对防控赤潮有什么价值？", "key_points": ["混养|贝藻|海带", "吸收|移除|滤食", "自污染|布局|密度"], "must_cite": true}
+{"id": "T28", "category": "治理修复", "question": "贝类 PSP 毒素的安全限量是多少？超标后怎么处置？", "key_points": ["80|μg", "禁捕|销毁|停止", "检测|程序"], "must_cite": true}
+{"id": "T29", "category": "预警判定", "question": "监测到夜光藻密度 50000 cells/L，是否超过预警阈值？应判定为什么级别？", "key_points": ["30000|3万|阈值", "超阈|倍数", "应急级|关注级|级别"], "must_cite": true, "needs_threshold_tool": true}
+{"id": "T30", "category": "预警判定", "question": "监测到亚历山大藻密度 2000 cells/L，是否超过预警阈值？应当启动什么响应？", "key_points": ["1000|阈值", "超阈|2倍|倍数", "应急|禁捕|从严"], "must_cite": true, "needs_threshold_tool": true}

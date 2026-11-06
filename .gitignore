@@ -1,0 +1,21 @@
+# 密钥与本地配置
+.env
+
+# 索引与运行产物（可重建）
+knowledge/index/
+traces/
+eval/output/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# 系统文件
+Thumbs.db
+.DS_Store
+
+# 编辑器 / 本地工具配置
+.vscode/
+.claude/
