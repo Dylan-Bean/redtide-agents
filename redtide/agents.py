@@ -63,6 +63,26 @@ def _clip(text: str, n: int = 160) -> str:
     return text if len(text) <= n else text[:n] + "…"
 
 
+def normalize_hypotheses(data: Any) -> list[dict]:
+    """Coerce parsed JSON into a flat list of hypothesis dicts.
+
+    Real models occasionally nest the output differently: a bare array, a dict
+    of arrays, or list-wrapped items (the v1.0 baseline eval had two runs die
+    with "'list' object has no attribute 'get'" from exactly this). Anything
+    unusable yields an empty list, which the caller treats as a parse failure.
+    """
+    if isinstance(data, dict):
+        data = data.get("hypotheses", data)
+    items = data if isinstance(data, list) else [data]
+    out: list[dict] = []
+    for h in items:
+        if isinstance(h, dict):
+            out.append(h)
+        elif isinstance(h, list):
+            out.extend(x for x in h if isinstance(x, dict))
+    return out
+
+
 def make_nodes(kb, trace):
     """闭包工厂：注入知识库与轨迹记录器，返回节点函数字典。"""
     executor = make_executor(kb)
@@ -79,21 +99,30 @@ def make_nodes(kb, trace):
             {"role": "system", "content": sys_p},
             {"role": "user", "content": f"推演问题：{state['question']}"},
         ]
-        resp = llm.chat(messages)
-        trace.log("hypothesize", "llm_response", prompt_tokens=resp.prompt_tokens,
-                  completion_tokens=resp.completion_tokens, latency_s=resp.latency_s)
-        try:
-            data = extract_json(resp.content)
-        except ValueError:
-            # Real models can truncate long JSON: retry once with tighter constraints
-            messages[0]["content"] = (sys_p +
-                                      " 注意：上次输出超长被截断。这次极简——"
-                                      "每个字段 ≤40 字，只输出 JSON 本体。")
-            resp = llm.chat(messages, max_tokens=4096)
-            trace.log("hypothesize", "retry", prompt_tokens=resp.prompt_tokens,
-                      completion_tokens=resp.completion_tokens, latency_s=resp.latency_s)
-            data = extract_json(resp.content)
-        hyps = data.get("hypotheses") if isinstance(data, dict) else data
+        data = None
+        hyps: list[dict] = []
+        for attempt in range(2):
+            try:
+                resp = llm.chat(messages, max_tokens=4096 if attempt else None)
+                trace.log("hypothesize", "llm_response",
+                          prompt_tokens=resp.prompt_tokens,
+                          completion_tokens=resp.completion_tokens,
+                          latency_s=resp.latency_s,
+                          attempt=attempt + 1)
+                data = extract_json(resp.content)
+                hyps = normalize_hypotheses(data)
+                if not hyps:
+                    raise ValueError(f"unusable hypothesis structure: {str(data)[:120]}")
+                break
+            except ValueError:
+                if attempt == 1:
+                    raise
+                # parse failure, truncation, or unexpected structure: tighten
+                # the constraints and retry once
+                messages[0]["content"] = (sys_p +
+                                          " 注意：上次输出无法解析或超长。这次极简——"
+                                          "每个字段 ≤40 字，只输出 JSON 本体，"
+                                          '格式固定为 {"hypotheses":[{...},{...}]}。')
         trace.log("hypothesize", "output", n=len(hyps),
                   statements=[_clip(h.get("statement", "")) for h in hyps])
         return {"hypotheses": hyps}
