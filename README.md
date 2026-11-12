@@ -63,6 +63,27 @@ Each task gets a score, a pass flag, a failure category and a trajectory file, p
 
 > In mock mode reports are templated, so pass rates are meaningless. Run both configs with a real GLM key to get your before/after numbers.
 
+## Results (first full run, GLM-5.3-Flash)
+
+| config | pass | rate | notes |
+|---|---|---|---|
+| baseline | 28/30 | 93% | optimizations off |
+| optimized | 28/30 | 93% | query rewriting + top_k=5 + audit send-back |
+
+Failure attribution is where this gets interesting: the harness located **two
+runtime crashes** (`no_report` — the model occasionally returned unexpectedly
+nested JSON and two agent nodes lacked structure tolerance; fixed in commits
+`934384e` and `e80b4a4`, and the affected tasks then pass a live rerun) plus
+**one evidence-coverage miss** (a reasoning-synthesis gap, kept as an honest
+known limitation). Both numbers above are real first-pass runs — the harness
+did its job: attribute first, fix, then verify, instead of blind prompt tuning.
+Reproduce with the commands above (~1.5–2.5 h and ~65k–850k tokens per config
+on a real key).
+
+![evaluation comparison](assets/compare.png)
+
+Full per-task report: [assets/eval-report.md](assets/eval-report.md).
+
 ## Directory
 
 ```
