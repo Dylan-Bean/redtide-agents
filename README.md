@@ -25,6 +25,32 @@ The same knowledge-base tools are also exposed through an **MCP server** (`mcp/`
 
 The Streamlit UI also has a **"Generate report figure"** button: after a run, an LLM drafts an SVG diagram of the report, which is rendered only after passing a **tag/attribute allowlist sanitizer** (scripts, event handlers and external references are rejected) — model output never touches the page raw. Unit tests live in `tests/`.
 
+## When would you use this instead of ChatGPT or Claude Code?
+
+General assistants answer from implicit training memory: no sources, no audit,
+no stable process. This project is a vertical-domain **application** built on
+top of such models, and it adds four things they do not provide out of the box:
+
+1. **Explicit, swappable, auditable knowledge** — answers must cite `[KB###]`
+   entries from a corpus you control (`knowledge/corpus.jsonl`). Swap that file
+   and the system answers from your domain instead; your data never leaves
+   your machine.
+2. **Reliability enforced by architecture, not model goodwill** — the audit
+   agent verifies evidence and sends work back when it is insufficient;
+   numeric questions are forced through a deterministic threshold-checking
+   tool, so the model cannot "do the math" itself.
+3. **A fixed, reproducible, evaluated pipeline** — same graph, same 30-task
+   set, same scoring rules; anyone can rerun and reproduce the numbers below.
+   Interactive chat sessions are inherently ad hoc and hard to measure.
+4. **A form factor for non-technical end users** — a web page where someone
+   types a question and gets a cited report; no command-line skills required.
+
+And an honest boundary: for one-off general questions, a chat assistant is the
+right tool; for coding, use a coding agent like Claude Code (this repo was
+developed with one). Reach for a purpose-built agent like this when you need
+**private/updatable knowledge + citable answers + a reproducible evaluated
+pipeline + a UI for non-technical users** — all four at once.
+
 ## Quick Start
 
 ```bash
@@ -140,3 +166,4 @@ streamlit run app/streamlit_app.py
 
 - 内置知识库为 40 条**中文**赤潮领域教学条目（检索模型 BGE-zh 为中文优化，故语料与角色提示词保持中文；替换 `knowledge/corpus.jsonl` 即可换成你自己的任意语言语料）。
 - `LEARNING.md` 是五天读懂全部代码的路线图；`eval/` 是 30 条任务的评测与失败归因闭环。
+- 什么场景该用它而不是直接问 ChatGPT？见上文 "When would you use this instead of ChatGPT or Claude Code?" 一节。
