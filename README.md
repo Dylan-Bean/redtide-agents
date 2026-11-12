@@ -25,31 +25,26 @@ The same knowledge-base tools are also exposed through an **MCP server** (`mcp/`
 
 The Streamlit UI also has a **"Generate report figure"** button: after a run, an LLM drafts an SVG diagram of the report, which is rendered only after passing a **tag/attribute allowlist sanitizer** (scripts, event handlers and external references are rejected) — model output never touches the page raw. Unit tests live in `tests/`.
 
-## When would you use this instead of ChatGPT or Claude Code?
+## When to use this instead of ChatGPT or Claude Code
 
-General assistants answer from implicit training memory: no sources, no audit,
-no stable process. This project is a vertical-domain **application** built on
-top of such models, and it adds four things they do not provide out of the box:
+General assistants answer from implicit memory: no sources, no audit, no
+stable process. This vertical-domain application adds four things they don't
+provide out of the box:
 
-1. **Explicit, swappable, auditable knowledge** — answers must cite `[KB###]`
-   entries from a corpus you control (`knowledge/corpus.jsonl`). Swap that file
-   and the system answers from your domain instead; your data never leaves
-   your machine.
-2. **Reliability enforced by architecture, not model goodwill** — the audit
-   agent verifies evidence and sends work back when it is insufficient;
-   numeric questions are forced through a deterministic threshold-checking
-   tool, so the model cannot "do the math" itself.
-3. **A fixed, reproducible, evaluated pipeline** — same graph, same 30-task
-   set, same scoring rules; anyone can rerun and reproduce the numbers below.
-   Interactive chat sessions are inherently ad hoc and hard to measure.
-4. **A form factor for non-technical end users** — a web page where someone
-   types a question and gets a cited report; no command-line skills required.
+1. **Auditable, swappable knowledge** — every claim must cite `[KB###]`
+   entries from a corpus you control (`knowledge/corpus.jsonl`); swap the file
+   and it answers from your domain instead.
+2. **Architecture-enforced reliability** — the audit agent sends insufficient
+   evidence back for another retrieval round; numeric checks go through a
+   deterministic tool, not model arithmetic.
+3. **A reproducible, evaluated pipeline** — same graph, same 30-task set, same
+   rules: anyone can reproduce the numbers below.
+4. **A UI for non-technical users** — type a question in a browser, get a
+   cited report.
 
-And an honest boundary: for one-off general questions, a chat assistant is the
-right tool; for coding, use a coding agent like Claude Code (this repo was
-developed with one). Reach for a purpose-built agent like this when you need
-**private/updatable knowledge + citable answers + a reproducible evaluated
-pipeline + a UI for non-technical users** — all four at once.
+Boundary: for one-off general questions use a chat assistant; for coding, use
+a coding agent. Reach for a purpose-built agent like this when you need
+private knowledge, citable answers and a measurable pipeline together.
 
 ## Quick Start
 
