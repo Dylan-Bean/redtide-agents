@@ -196,9 +196,20 @@ def make_nodes(kb, trace):
                   completion_tokens=resp.completion_tokens, latency_s=resp.latency_s)
         try:
             data = extract_json(resp.content)
-        except ValueError:
-            data = {"ready": True, "per_hypothesis": [],
-                    "missing_evidence": []}   # unparsable output: proceed to report rather than stall
+            if isinstance(data, list):
+                # the model sometimes returns a bare verdict array instead of
+                # the documented object — wrap it instead of crashing
+                verdicts = [h for h in data if isinstance(h, dict)]
+                data = {"per_hypothesis": verdicts,
+                        "ready": bool(verdicts) and all(
+                            h.get("verdict") in ("supported", "refuted")
+                            for h in verdicts),
+                        "missing_evidence": []}
+            if not isinstance(data, dict):
+                raise ValueError("critic output is neither object nor array")
+        except (ValueError, AttributeError, TypeError):
+            # unparsable output: proceed to report rather than stall the run
+            data = {"ready": True, "per_hypothesis": [], "missing_evidence": []}
         can_return = ORCHESTRATOR.critic_allow_return and state.get("round", 1) < 2
         ready = bool(data.get("ready")) or not can_return
         trace.log("critique", "output", ready=ready,
